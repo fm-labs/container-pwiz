@@ -5,3 +5,5 @@ neg-MM8_1-A,1_01_376.mzML
 .swp
 .*.swp
 .vagrant
+.idea/
+*.old

@@ -1,4 +1,5 @@
-FROM i386/debian:stretch-backports
+# FROM i386/debian:buster-backports
+FROM debian:buster-backports
 
 ################################################################################
 ### set metadata
@@ -10,19 +11,22 @@ ENV CONTAINER_GITHUB=https://github.com/phnmnl/container-pwiz
 LABEL version=1.3
 LABEL software.version=3.0.18205
 LABEL software=msconvert
-LABEL base.image="i386/debian:stretch-backports"
+LABEL base.image="i386/debian:buster-backports"
 LABEL description="Convert LC/MS or GC/MS RAW vendor files to mzML."
 LABEL website=https://github.com/phnmnl/container-pwiz
 LABEL documentation=https://github.com/phnmnl/container-pwiz
 LABEL license=https://github.com/phnmnl/container-pwiz
 LABEL tags="Metabolomics"
 
+# on x64
+RUN dpkg --add-architecture i386
+
 # we need wget, bzip2, wine from winehq, 
 # xvfb to fake X11 for winetricks during installation,
 # and winbind because wine complains about missing 
 RUN apt-get update && \
     apt-get -y install wget gnupg && \
-    echo "deb http://dl.winehq.org/wine-builds/debian/ stretch main" >> \
+    echo "deb http://dl.winehq.org/wine-builds/debian/ buster main" >> \
       /etc/apt/sources.list.d/winehq.list && \
     wget http://dl.winehq.org/wine-builds/winehq.key -qO- | apt-key add - && \
     apt-get update && \
