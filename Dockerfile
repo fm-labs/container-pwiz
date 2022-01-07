@@ -106,6 +106,14 @@ RUN mkdir /mywineprefix ; rm '/wineprefix/dosdevices/c:' ; ln -sf /wineprefix/dr
 RUN mkdir /data
 WORKDIR /data
 
+ARG GLOBALWINEPREFIX=/wineprefix
+ARG MYWINEPREFIX=/mywineprefix/my
+
+RUN mkdir -p "$MYWINEPREFIX"
+RUN cp -v "$GLOBALWINEPREFIX"/*.reg "$MYWINEPREFIX"
+RUN cp -avx "$GLOBALWINEPREFIX/dosdevices" "$MYWINEPREFIX"
+
+
 CMD ["mywine", "msconvert" ]
 
 ## If you need a proxy during build, don't put it into the Dockerfile itself:
