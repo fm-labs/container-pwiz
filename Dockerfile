@@ -99,22 +99,22 @@ RUN chmod +x /usr/local/bin/runTest2.sh
 
 # Prepare that a user-specific WINEPREFIX can be set,
 # since the global wineprefix is owned by root
-ADD mywine /usr/local/bin/mywine
-RUN mkdir /mywineprefix ; rm '/wineprefix/dosdevices/c:' ; ln -sf /wineprefix/drive_c /wineprefix/dosdevices/c\: ; chmod 777 /mywineprefix ; chmod +x /usr/local/bin/mywine ; ln -sf /wineprefix/drive_c '/wineprefix/dosdevices/c:'
+# ADD mywine /usr/local/bin/mywine
+# RUN mkdir /mywineprefix ; rm '/wineprefix/dosdevices/c:' ; ln -sf /wineprefix/drive_c /wineprefix/dosdevices/c\: ; chmod 777 /mywineprefix ; chmod +x /usr/local/bin/mywine ; ln -sf /wineprefix/drive_c '/wineprefix/dosdevices/c:'
 
 # Set up working directory and permissions to let user xclient save data
 RUN mkdir /data
 WORKDIR /data
 
-ARG GLOBALWINEPREFIX=/wineprefix
-ARG MYWINEPREFIX=/mywineprefix/my
+#ARG GLOBALWINEPREFIX=/wineprefix
+#ARG MYWINEPREFIX=/mywineprefix/my
+#
+#RUN mkdir -p "$MYWINEPREFIX"
+#RUN cp -v "$GLOBALWINEPREFIX"/*.reg "$MYWINEPREFIX"
+#RUN cp -avx "$GLOBALWINEPREFIX/dosdevices" "$MYWINEPREFIX"
 
-RUN mkdir -p "$MYWINEPREFIX"
-RUN cp -v "$GLOBALWINEPREFIX"/*.reg "$MYWINEPREFIX"
-RUN cp -avx "$GLOBALWINEPREFIX/dosdevices" "$MYWINEPREFIX"
 
-
-CMD ["mywine", "msconvert" ]
+CMD ["wine", "msconvert" ]
 
 ## If you need a proxy during build, don't put it into the Dockerfile itself:
 ## docker build --build-arg http_proxy=http://www-cache.ipb-halle.de:3128/  -t phnmnl/pwiz:3.0.9098-0.1 .
