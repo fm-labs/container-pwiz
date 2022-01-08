@@ -1,5 +1,5 @@
-# FROM i386/debian:buster-backports
-FROM debian:buster-backports
+FROM i386/debian:buster-backports
+# FROM debian:buster-backports
 
 ################################################################################
 ### set metadata
@@ -19,7 +19,7 @@ LABEL license=https://github.com/phnmnl/container-pwiz
 LABEL tags="Metabolomics"
 
 # on x64
-RUN dpkg --add-architecture i386
+# RUN dpkg --add-architecture i386
 
 # we need wget, bzip2, wine from winehq, 
 # xvfb to fake X11 for winetricks during installation,
