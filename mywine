@@ -1,7 +1,7 @@
 #!/bin/sh
 
 GLOBALWINEPREFIX=/wineprefix
-MYWINEPREFIX=/tmp/mywineprefix
+MYWINEPREFIX=/tmp/mywineprefix/my
 
 mkdir -p "$MYWINEPREFIX"
 cp -v "$GLOBALWINEPREFIX"/*.reg "$MYWINEPREFIX"
